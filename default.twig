@@ -17,6 +17,7 @@
     <div class="wy-grid-for-nav">
 
         <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+            
             <div class="wy-side-nav-search">
                 <a href="{{ baseUrl }}/" class="fa fa-home"> {{ title|default('The title') }}</a>
             </div>
@@ -26,19 +27,26 @@
                 <ul>
                 
                     {% for itemId, item in menu.items %}
-                        <li class="toctree-l1 {{ itemId == currentMenu ? 'current' }}">
-                            <a class="reference internal {{ itemId == currentMenu ? 'current' }}"
+                        {% set currentMenuElement = currentMenu|split('>') %}
+                       
+                       
+                        <li class="toctree-l1 {{ itemId == currentMenuElement[0] ? 'current' }}">
+                            
+                            <a class="reference internal {{ itemId == currentMenuElement[0] ? 'current' }}"
                                href="{{ item.absoluteUrl|default(baseUrl ~ '/' ~ item.relativeUrl) }}">
                                 {{ item.text|raw }}
                             </a>
                             {% if not item.items is empty %}
                                <ul>
                                     {% for subItemId, subitem in item.items %}
-                                         <a class="reference internal {{ itemId == currentMenu ? 'current' }}"
+                                    
+                                    <li class="toctree-l2 {{ subItemId == currentMenuElement[1] ? 'current' }}">
+                                         <a class="reference internal {{ subItemId == currentMenuElement[1] ? 'current' }}"
                                                href="{{ subitem.absoluteUrl|default(baseUrl ~ '/' ~ subitem.relativeUrl) }}">
                                                 {{ subitem.text|raw }}
                                                 
                                             </a>
+                                    </li>
                                     {% endfor %}
                                 </ul>
                             {% endif %}
