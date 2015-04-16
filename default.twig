@@ -28,7 +28,13 @@
                             <a class="reference internal {{ itemId == currentMenu ? 'current' }}"
                                href="{{ item.absoluteUrl|default(baseUrl ~ '/' ~ item.relativeUrl) }}">
                                 {{ item.text|raw }}
+                                
                             </a>
+                            <ul>
+                                {% for subItemId, subitem in item.items %}
+                                     <li>{{ subitem.text|raw }}</li>
+                                {% endfor %}
+                            </ul>
                         </li>
                     {% endfor %}
                 </ul>
