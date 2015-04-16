@@ -22,7 +22,9 @@
             </div>
 
             <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                {{ dump(menu) }}
                 <ul>
+                
                     {% for itemId, item in menu.items %}
                         <li class="toctree-l1 {{ itemId == currentMenu ? 'current' }}">
                             <a class="reference internal {{ itemId == currentMenu ? 'current' }}"
